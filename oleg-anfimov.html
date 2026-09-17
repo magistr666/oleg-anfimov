@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Олег Анфимов — звукорежиссёр, светооператор, военный связист</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #171b26;
+    --accent: #f2c14e;
+    --text: #e8e6df;
+    --muted: #9a97a3;
+    --line: #2a2f3d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  header { text-align: center; }
+
+  .cover {
+    position: relative;
+    padding-top: 50%;
+    background-image: url('cyber-city-illustration.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .avatar {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    background-color: var(--card);
+    background-size: cover;
+    background-position: center;
+  }
+  .cover h1 {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, calc(-50% + 150px));
+    color: var(--text);
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+    font-size: 2rem;
+    letter-spacing: .5px;
+    white-space: nowrap;
+  }
+  .cover .tagline {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, calc(-50% + 200px));
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+    font-size: 1.05rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .cover .roles {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, calc(-50% + 250px));
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .role {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: .95rem;
+    color: var(--text);
+  }
+  .role.hl { border-color: var(--accent); color: var(--accent); }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin-top: 24px;
+  }
+  h2 {
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  p { margin-bottom: 10px; }
+  ul { padding-left: 22px; }
+  li { margin-bottom: 8px; }
+
+  .radio-banner {
+    background: linear-gradient(135deg, #1d2333, #2a2333);
+    border: 1px solid var(--accent);
+    text-align: center;
+    padding: 26px 28px;
+    margin-top: 24px;
+  }
+  .radio-banner p { margin: 6px 0; }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #1a1400;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: .85rem;
+    margin-bottom: 10px;
+  }
+
+  .player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .player-controls button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: rgba(242, 193, 78, 0.15);
+    color: var(--accent);
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .player-controls button:hover { background: rgba(242, 193, 78, 0.35); }
+  .player-controls button svg { width: 28px; height: 28px; fill: currentColor; }
+
+  .volume-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .volume-wrap button {
+    width: 36px;
+    height: 36px;
+    border-width: 1px;
+  }
+  .volume-wrap button svg { width: 18px; height: 18px; }
+  .volume-wrap input[type="range"] {
+    width: 140px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .volume-value {
+    min-width: 3.5em;
+    font-size: .85rem;
+    color: var(--muted);
+    text-align: left;
+  }
+  .player-status {
+    min-height: 1.4em;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .now-playing {
+    min-height: 1.6em;
+    font-size: .95rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .contacts { list-style: none; padding: 0; }
+  .contacts li { padding: 6px 0; border-bottom: 1px dashed var(--line); }
+  .contacts li:last-child { border-bottom: none; }
+  .contacts b { color: var(--text); min-width: 90px; display: inline-block; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="cover">
+      <div class="avatar"></div>
+      <h1>Олег Анфимов</h1>
+      <div class="tagline">Звукорежиссёр · Светооператор · Военный связист</div>
+      <div class="roles">
+        <span class="role hl">Ретрансляция радио «Птица»</span>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Обо мне</h2>
+    <p>Звукорежиссёр и светооператор, военный связист и просто хороший человек.</p>
+    <p>Занимаюсь звуком и светом на мероприятиях, а также ретрансляцией интернет-радио «Птица» — круглосуточной культурной площадки, где звучит творчество начинающих и опытных музыкантов, композиторов и поэтов.</p>
+  </section>
+
+  <section class="radio-banner">
+    <span class="badge">Радио «Птица» — почувствуй свободу!</span>
+    <p>Ретрансляция радио «Птица» — отечественная музыка, поэзия и творчество.</p>
+    <p><a href="https://vk.com/radio_ptica" target="_blank" rel="noopener">Мы ВКонтакте</a></p>
+
+    <div class="player-controls">
+      <button id="play-btn" type="button" title="Играть / Пауза" aria-label="Играть или поставить на паузу">
+        <svg viewBox="0 0 24 24"><polygon id="play-icon" points="6,3 20,12 6,21"/></svg>
+      </button>
+      <button id="stop-btn" type="button" title="Стоп" aria-label="Остановить">
+        <svg viewBox="0 0 24 24"><rect id="stop-icon" x="5" y="5" width="14" height="14"/></svg>
+      </button>
+    </div>
+    <div id="player-status" class="player-status">Нажмите Play, чтобы слушать радио «Птица»</div>
+    <div id="now-playing" class="now-playing"></div>
+
+    <div class="volume-wrap">
+      <button id="mute-btn" type="button" title="Выключить звук" aria-label="Выключить или включить звук">
+        <svg viewBox="0 0 24 24"><path id="volume-icon" d="M3,9v6h4l5,5V4L7,9H3z M16.5,12c0-1.77-1.02-3.29-2.5-4.03v8.05C15.48,15.29,16.5,13.77,16.5,12z M14,3.23v2.06c2.89,0.86,5,3.54,5,6.71s-2.11,5.85-5,6.71v2.06c4.01-0.91,7-4.49,7-8.77S18.01,4.14,14,3.23z"/></svg>
+      </button>
+      <input id="volume-slider" type="range" min="0" max="100" value="100" aria-label="Громкость">
+      <span id="volume-value" class="volume-value">100%</span>
+    </div>
+
+    <audio id="radio-audio" preload="none">
+      <source src="https://listen8.myradio24.com/25095" type="audio/mpeg">
+      Ваш браузер не поддерживает элемент audio.
+    </audio>
+  </section>
+
+  <section>
+    <h2>Направления</h2>
+    <ul>
+      <li><b>Звукорежиссура</b> — запись, сведение, работа со звуком на мероприятиях.</li>
+      <li><b>Светооператор</b> — световое оформление концертов и событий.</li>
+      <li><b>Военный связист</b> — опыт в сфере связи и коммуникаций.</li>
+      <li><b>Ретрансляция радио «Птица»</b> — поддержка эфира национальной культурной площадки.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Контакты</h2>
+    <ul class="contacts">
+      <li><b>Телефон:</b> <a href="tel:+79299299518">+7 (929) 929-95-18</a></li>
+      <li><b>Почта:</b> <a href="mailto:radio_ptica@mail.ru">radio_ptica@mail.ru</a></li>
+      <li><b>VK:</b> <a href="https://vk.com/radio_ptica" target="_blank" rel="noopener">vk.com/radio_ptica</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    Олег Анфимов · Звукорежиссёр · Светооператор · Военный связист · Ретрансляция радио «Птица» · 6+
+  </footer>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var audio = document.getElementById("radio-audio");
+  var playBtn = document.getElementById("play-btn");
+  var stopBtn = document.getElementById("stop-btn");
+  var status = document.getElementById("player-status");
+  var playIcon = document.getElementById("play-icon");
+  var muteBtn = document.getElementById("mute-btn");
+  var volumeSlider = document.getElementById("volume-slider");
+  var volumeValue = document.getElementById("volume-value");
+  var volumeIcon = document.getElementById("volume-icon");
+  var lastVolume = 1;
+
+  function setPlayIcon(playing) {
+    if (playing) {
+      playIcon.setAttribute("points", "6,4 10,4 10,20 6,20 14,4 18,4 18,20 14,20");
+    } else {
+      playIcon.setAttribute("points", "6,3 20,12 6,21");
+    }
+  }
+
+  function togglePlay() {
+    if (audio.paused || audio.ended) {
+      audio.play().then(function () {
+        status.textContent = "Играет — радио «Птица»";
+        setPlayIcon(true);
+      }).catch(function () {
+        status.textContent = "Не удалось запустить поток. Проверьте интернет.";
+      });
+    } else {
+      audio.pause();
+      status.textContent = "Пауза";
+      setPlayIcon(false);
+    }
+  }
+
+  function stopAudio() {
+    audio.pause();
+    try { audio.currentTime = 0; } catch (e) {}
+    audio.load();
+    status.textContent = "Остановлено. Нажмите Play, чтобы слушать радио «Птица»";
+    setPlayIcon(false);
+  }
+
+  function updateVolumeIcon() {
+    if (audio.muted || audio.volume === 0) {
+      volumeIcon.setAttribute("d", "M16.5,12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45,2.45C16.49,12.42,16.5,12.21,16.5,12z M19,12c0,0.94-0.2,1.82-0.54,2.64l1.51,1.51C20.63,14.91,21,13.5,21,12c0-4.28-2.99-7.86-7-8.77v2.06C16.89,5.76,19,8.58,19,12z M4.27,3L3,4.27L7.73,9H3v6h4l5,5v-6.73l4.25,4.25c-0.67,0.52-1.42,0.93-2.25,1.18v2.06c1.38-0.31,2.63-0.95,3.69-1.81L19.73,21L21,19.73l-9-9L4.27,3z M12,4L9.91,6.09L12,8.18V4z");
+    } else {
+      volumeIcon.setAttribute("d", "M3,9v6h4l5,5V4L7,9H3z M16.5,12c0-1.77-1.02-3.29-2.5-4.03v8.05C15.48,15.29,16.5,13.77,16.5,12z M14,3.23v2.06c2.89,0.86,5,3.54,5,6.71s-2.11,5.85-5,6.71v2.06c4.01-0.91,7-4.49,7-8.77S18.01,4.14,14,3.23z");
+    }
+  }
+
+  function applyVolume() {
+    audio.muted = (volumeSlider.value === "0");
+    audio.volume = volumeSlider.value / 100;
+    volumeValue.textContent = volumeSlider.value + "%";
+    updateVolumeIcon();
+  }
+
+  function toggleMute() {
+    if (audio.muted || audio.volume === 0) {
+      audio.muted = false;
+      volumeSlider.value = Math.round(lastVolume * 100);
+      applyVolume();
+    } else {
+      lastVolume = audio.volume;
+      audio.muted = true;
+      volumeSlider.value = "0";
+      applyVolume();
+    }
+  }
+
+  volumeSlider.addEventListener("input", function () {
+    if (!audio.muted) { lastVolume = volumeSlider.value / 100; }
+    applyVolume();
+  });
+  muteBtn.addEventListener("click", toggleMute);
+
+  audio.addEventListener("playing", function () {
+    status.textContent = "Играет — радио «Птица»";
+    setPlayIcon(true);
+  });
+  audio.addEventListener("pause", function () {
+    if (!audio.ended) { setPlayIcon(false); }
+  });
+
+  playBtn.addEventListener("click", togglePlay);
+  stopBtn.addEventListener("click", stopAudio);
+
+  // === Захват названия трека (ICY-метаданные) ===
+  var nowPlaying = document.getElementById("now-playing");
+  var metaTimer = null;
+  var currentTitle = "";
+
+  function getMetaInterval(metaInt, buffer) {
+    // Читаем длину метаданных (1 байт: длинна/16), затем строку
+    var metaLen = buffer[metaInt] * 16;
+    if (metaLen <= 0) { return null; }
+    var metaStr = "";
+    for (var i = 0; i < metaLen; i++) {
+      metaStr += String.fromCharCode(buffer[metaInt + 1 + i]);
+    }
+    return metaStr;
+  }
+
+  function parseStreamTitle(metaStr) {
+    var m = metaStr.match(/StreamTitle='([^']*)'/);
+    if (m && m[1] && m[1].trim() !== "") { return m[1].trim(); }
+    return null;
+  }
+
+  function readMetadata() {
+    var metaInt = 16000; // icy-metaint из заголовков потока
+    var need = metaInt + 1 + 4080; // аудио + байт длины + максимум строки метаданных
+
+    try {
+      var ac = new AbortController();
+      var timer = setTimeout(function () { ac.abort(); scheduleRetryNow(); }, 15000);
+
+      fetch("https://listen8.myradio24.com/25095", {
+        headers: { "Icy-MetaData": "1" },
+        signal: ac.signal
+      }).then(function (resp) {
+        if (!resp.ok || !resp.body) { throw new Error("bad response " + resp.status); }
+        var reader = resp.body.getReader();
+        var received = 0;
+        var chunks = [];
+
+        function pump() {
+          return reader.read().then(function (res) {
+            if (res.done) { throw new Error("stream ended"); }
+            chunks.push(res.value);
+            received += res.value.length;
+            if (received < need) { return pump(); }
+
+            // Собираем буфер и разрываем соединение
+            var total = 0;
+            var arr = new Uint8Array(received);
+            for (var i = 0; i < chunks.length; i++) {
+              arr.set(chunks[i], total);
+              total += chunks[i].length;
+            }
+            reader.cancel().catch(function () {});
+            clearTimeout(timer);
+
+            var metaStr = getMetaInterval(metaInt, arr);
+            var title = metaStr ? parseStreamTitle(metaStr) : null;
+            if (title && title !== currentTitle) {
+              currentTitle = title;
+              nowPlaying.textContent = "Сейчас играет: " + title;
+            } else if (!title && !currentTitle) {
+              // Станция не передаёт название трека — показываем заглушку один раз
+              nowPlaying.textContent = "Сейчас играет: (название не передаётся станцией)";
+            }
+            scheduleRetryNow();
+            return;
+          });
+        }
+        return pump();
+      }).catch(function (e) {
+        clearTimeout(timer);
+        if (e && e.name === "AbortError") { return; }
+        scheduleRetryNow();
+      });
+    } catch (e) {
+      scheduleRetryNow();
+    }
+  }
+
+  function scheduleRetryNow() {
+    clearTimeout(metaTimer);
+    if (!audio.paused) {
+      metaTimer = setTimeout(readMetadata, 30000);
+    }
+  }
+
+  audio.addEventListener("play", function () {
+    currentTitle = "";
+    nowPlaying.textContent = "";
+    readMetadata();
+  });
+
+  audio.addEventListener("pause", function () {
+    clearTimeout(metaTimer);
+  });
+});
+</script>
+</body>
+</html>
