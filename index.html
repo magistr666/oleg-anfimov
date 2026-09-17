@@ -130,66 +130,40 @@
     margin-bottom: 10px;
   }
 
-  .player-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin: 16px 0;
-  }
-  .player-controls button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    background: rgba(242, 193, 78, 0.15);
-    color: var(--accent);
-    cursor: pointer;
-    transition: background .2s ease;
-  }
-  .player-controls button:hover { background: rgba(242, 193, 78, 0.35); }
-  .player-controls button svg { width: 28px; height: 28px; fill: currentColor; }
-
-  .volume-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  .volume-wrap button {
-    width: 36px;
-    height: 36px;
-    border-width: 1px;
-  }
-  .volume-wrap button svg { width: 18px; height: 18px; }
-  .volume-wrap input[type="range"] {
-    width: 140px;
-    accent-color: var(--accent);
-    cursor: pointer;
-  }
-  .volume-value {
-    min-width: 3.5em;
-    font-size: .85rem;
-    color: var(--muted);
-    text-align: left;
-  }
-  .player-status {
-    min-height: 1.4em;
-    font-size: .85rem;
-    color: var(--muted);
-  }
-  .now-playing {
-    min-height: 1.6em;
-    font-size: .95rem;
-    color: var(--accent);
-    font-weight: 600;
-    margin-top: 8px;
-  }
-
   .video-grid {
+
+  #ptitsa-seek::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,.4);
+    cursor: pointer;
+  }
+  #ptitsa-seek::-moz-range-thumb {
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  #ptitsa-vol::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,.4);
+    cursor: pointer;
+  }
+  #ptitsa-vol::-moz-range-thumb {
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+  }
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
@@ -256,31 +230,27 @@
   <section class="radio-banner">
     <span class="badge">Радио «Птица» — почувствуй свободу!</span>
     <p>Ретрансляция радио «Птица» — отечественная музыка, поэзия и творчество.</p>
-    <p><a href="https://vk.com/radio_ptica" target="_blank" rel="noopener">Мы ВКонтакте</a></p>
-
-    <div class="player-controls">
-      <button id="play-btn" type="button" title="Играть / Пауза" aria-label="Играть или поставить на паузу">
-        <svg viewBox="0 0 24 24"><polygon id="play-icon" points="6,3 20,12 6,21"/></svg>
-      </button>
-      <button id="stop-btn" type="button" title="Стоп" aria-label="Остановить">
-        <svg viewBox="0 0 24 24"><rect id="stop-icon" x="5" y="5" width="14" height="14"/></svg>
-      </button>
+    <div class="player-card">
+      <div class="track-info" style="text-align:center;margin-bottom:14px;">
+        <div class="track-title" id="ptitsa-title" style="font-size:17px;font-weight:700;color:var(--text);">Радио «Птица»</div>
+        <div class="track-artist" id="ptitsa-artist" style="font-size:13px;color:var(--muted);margin-top:2px;">Загрузка потока…</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:18px;">
+        <button class="btn-prev" id="ptitsa-prev" style="background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;opacity:0.3;pointer-events:none;">&#9198;</button>
+        <button class="btn-play" id="ptitsa-play" style="width:56px;height:56px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--accent),#4a63d6);color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(108,140,255,.3);">&#9654;</button>
+        <button class="btn-next" id="ptitsa-next" style="background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;opacity:0.3;pointer-events:none;">&#9197;</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:12px;">
+        <span id="ptitsa-time" style="font-size:12px;color:var(--muted);min-width:36px;text-align:right;">0:00</span>
+        <input type="range" id="ptitsa-seek" min="0" max="100" step="0.1" value="0" style="flex:1;height:5px;-webkit-appearance:none;appearance:none;border-radius:3px;background:linear-gradient(to right,var(--accent) 0%,var(--accent) var(--fill,0%),#2e3343 var(--fill,0%));outline:none;cursor:pointer;">
+        <span id="ptitsa-dur" style="font-size:12px;color:var(--muted);min-width:36px;">0:00</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
+        <button id="ptitsa-mute" style="background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;">&#128266;</button>
+        <input type="range" id="ptitsa-vol" min="0" max="100" value="80" style="flex:1;height:5px;-webkit-appearance:none;appearance:none;border-radius:3px;background:linear-gradient(to right,var(--accent) 0%,var(--accent) var(--fill,0%),#2e3343 var(--fill,0%));outline:none;cursor:pointer;">
+      </div>
     </div>
-    <div id="player-status" class="player-status">Нажмите Play, чтобы слушать радио «Птица»</div>
-    <div id="now-playing" class="now-playing"></div>
-
-    <div class="volume-wrap">
-      <button id="mute-btn" type="button" title="Выключить звук" aria-label="Выключить или включить звук">
-        <svg viewBox="0 0 24 24"><path id="volume-icon" d="M3,9v6h4l5,5V4L7,9H3z M16.5,12c0-1.77-1.02-3.29-2.5-4.03v8.05C15.48,15.29,16.5,13.77,16.5,12z M14,3.23v2.06c2.89,0.86,5,3.54,5,6.71s-2.11,5.85-5,6.71v2.06c4.01-0.91,7-4.49,7-8.77S18.01,4.14,14,3.23z"/></svg>
-      </button>
-      <input id="volume-slider" type="range" min="0" max="100" value="100" aria-label="Громкость">
-      <span id="volume-value" class="volume-value">100%</span>
-    </div>
-
-    <audio id="radio-audio" preload="none">
-      <source src="https://listen8.myradio24.com/25095" type="audio/mpeg">
-      Ваш браузер не поддерживает элемент audio.
-    </audio>
+    <p style="margin-top:12px;"><a href="https://vk.com/radio_ptica" target="_blank" rel="noopener">Мы ВКонтакте</a></p>
   </section>
 
   <section>
@@ -318,191 +288,89 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  var audio = document.getElementById("radio-audio");
-  var playBtn = document.getElementById("play-btn");
-  var stopBtn = document.getElementById("stop-btn");
-  var status = document.getElementById("player-status");
-  var playIcon = document.getElementById("play-icon");
-  var muteBtn = document.getElementById("mute-btn");
-  var volumeSlider = document.getElementById("volume-slider");
-  var volumeValue = document.getElementById("volume-value");
-  var volumeIcon = document.getElementById("volume-icon");
-  var lastVolume = 1;
+(function () {
+  var audio = new Audio();
+  audio.preload = "none";
 
-  function setPlayIcon(playing) {
-    if (playing) {
-      playIcon.setAttribute("points", "6,4 10,4 10,20 6,20 14,4 18,4 18,20 14,20");
-    } else {
-      playIcon.setAttribute("points", "6,3 20,12 6,21");
-    }
+  var playBtn = document.getElementById("ptitsa-play");
+  var seek = document.getElementById("ptitsa-seek");
+  var curTime = document.getElementById("ptitsa-time");
+  var totTime = document.getElementById("ptitsa-dur");
+  var vol = document.getElementById("ptitsa-vol");
+  var muteBtn = document.getElementById("ptitsa-mute");
+  var title = document.getElementById("ptitsa-title");
+  var artist = document.getElementById("ptitsa-artist");
+
+  var streamUrl = "https://listen8.myradio24.com/25095";
+
+  function fmt(s) {
+    if (!isFinite(s)) return "0:00";
+    s = Math.floor(s);
+    var m = Math.floor(s / 60), sec = s % 60;
+    return m + ":" + (sec < 10 ? "0" : "") + sec;
   }
 
-  function togglePlay() {
-    if (audio.paused || audio.ended) {
+  function setFill(el) {
+    var min = +el.min || 0, max = +el.max || 100;
+    var pct = ((el.value - min) / (max - min)) * 100;
+    el.style.setProperty("--fill", pct + "%");
+  }
+
+  function playPause() {
+    if (audio.paused) {
+      if (!audio.src) { audio.src = streamUrl; audio.load(); }
       audio.play().then(function () {
-        status.textContent = "Играет — радио «Птица»";
-        setPlayIcon(true);
+        playBtn.innerHTML = "&#10074;&#10074;";
+        artist.textContent = "Ретрансляция радио «Птица»";
       }).catch(function () {
-        status.textContent = "Не удалось запустить поток. Проверьте интернет.";
+        artist.textContent = "Ошибка загрузки потока";
       });
     } else {
       audio.pause();
-      status.textContent = "Пауза";
-      setPlayIcon(false);
+      playBtn.innerHTML = "&#9654;";
     }
   }
 
-  function stopAudio() {
-    audio.pause();
-    try { audio.currentTime = 0; } catch (e) {}
-    audio.load();
-    status.textContent = "Остановлено. Нажмите Play, чтобы слушать радио «Птица»";
-    setPlayIcon(false);
+  function seekUpdate() {
+    if (!audio.duration) return;
+    seek.value = audio.currentTime;
+    curTime.textContent = fmt(audio.currentTime);
+    setFill(seek);
   }
 
-  function updateVolumeIcon() {
-    if (audio.muted || audio.volume === 0) {
-      volumeIcon.setAttribute("d", "M16.5,12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45,2.45C16.49,12.42,16.5,12.21,16.5,12z M19,12c0,0.94-0.2,1.82-0.54,2.64l1.51,1.51C20.63,14.91,21,13.5,21,12c0-4.28-2.99-7.86-7-8.77v2.06C16.89,5.76,19,8.58,19,12z M4.27,3L3,4.27L7.73,9H3v6h4l5,5v-6.73l4.25,4.25c-0.67,0.52-1.42,0.93-2.25,1.18v2.06c1.38-0.31,2.63-0.95,3.69-1.81L19.73,21L21,19.73l-9-9L4.27,3z M12,4L9.91,6.09L12,8.18V4z");
-    } else {
-      volumeIcon.setAttribute("d", "M3,9v6h4l5,5V4L7,9H3z M16.5,12c0-1.77-1.02-3.29-2.5-4.03v8.05C15.48,15.29,16.5,13.77,16.5,12z M14,3.23v2.06c2.89,0.86,5,3.54,5,6.71s-2.11,5.85-5,6.71v2.06c4.01-0.91,7-4.49,7-8.77S18.01,4.14,14,3.23z");
-    }
-  }
-
-  function applyVolume() {
-    audio.muted = (volumeSlider.value === "0");
-    audio.volume = volumeSlider.value / 100;
-    volumeValue.textContent = volumeSlider.value + "%";
-    updateVolumeIcon();
-  }
-
-  function toggleMute() {
-    if (audio.muted || audio.volume === 0) {
-      audio.muted = false;
-      volumeSlider.value = Math.round(lastVolume * 100);
-      applyVolume();
-    } else {
-      lastVolume = audio.volume;
-      audio.muted = true;
-      volumeSlider.value = "0";
-      applyVolume();
-    }
-  }
-
-  volumeSlider.addEventListener("input", function () {
-    if (!audio.muted) { lastVolume = volumeSlider.value / 100; }
-    applyVolume();
+  audio.addEventListener("loadedmetadata", function () {
+    seek.max = audio.duration || 0;
+    totTime.textContent = fmt(audio.duration);
   });
-  muteBtn.addEventListener("click", toggleMute);
+  audio.addEventListener("timeupdate", seekUpdate);
+  audio.addEventListener("play", function () { playBtn.innerHTML = "&#10074;&#10074;"; });
+  audio.addEventListener("pause", function () { playBtn.innerHTML = "&#9654;"; });
+  audio.addEventListener("error", function () { artist.textContent = "Ошибка потока. Попробуйте позже."; });
 
-  audio.addEventListener("playing", function () {
-    status.textContent = "Играет — радио «Птица»";
-    setPlayIcon(true);
+  playBtn.addEventListener("click", playPause);
+  seek.addEventListener("input", function () {
+    if (audio.duration) audio.currentTime = seek.value;
+    setFill(seek);
   });
-  audio.addEventListener("pause", function () {
-    if (!audio.ended) { setPlayIcon(false); }
+  vol.addEventListener("input", function () {
+    audio.volume = vol.value / 100;
+    audio.muted = vol.value == 0;
+    setFill(vol);
+    muteBtn.textContent = (audio.muted || audio.volume == 0) ? "\uD83D\uDD07" : "\uD83D\uDD0A";
+  });
+  muteBtn.addEventListener("click", function () {
+    audio.muted = !audio.muted;
+    if (audio.muted) muteBtn.textContent = "\uD83D\uDD07";
+    else { muteBtn.textContent = "\uD83D\uDD0A"; vol.value = audio.volume * 100; setFill(vol); }
   });
 
-  playBtn.addEventListener("click", togglePlay);
-  stopBtn.addEventListener("click", stopAudio);
+  audio.volume = vol.value / 100;
+  setFill(seek); setFill(vol);
 
-  // === Захват названия трека (ICY-метаданные) ===
-  var nowPlaying = document.getElementById("now-playing");
-  var metaTimer = null;
-  var currentTitle = "";
-
-  function getMetaInterval(metaInt, buffer) {
-    // Читаем длину метаданных (1 байт: длинна/16), затем строку
-    var metaLen = buffer[metaInt] * 16;
-    if (metaLen <= 0) { return null; }
-    var metaStr = "";
-    for (var i = 0; i < metaLen; i++) {
-      metaStr += String.fromCharCode(buffer[metaInt + 1 + i]);
-    }
-    return metaStr;
-  }
-
-  function parseStreamTitle(metaStr) {
-    var m = metaStr.match(/StreamTitle='([^']*)'/);
-    if (m && m[1] && m[1].trim() !== "") { return m[1].trim(); }
-    return null;
-  }
-
-  function readMetadata() {
-    var metaInt = 16000; // icy-metaint из заголовков потока
-    var need = metaInt + 1 + 4080; // аудио + байт длины + максимум строки метаданных
-
-    try {
-      var ac = new AbortController();
-      var timer = setTimeout(function () { ac.abort(); scheduleRetryNow(); }, 15000);
-
-      fetch("https://listen8.myradio24.com/25095", {
-        headers: { "Icy-MetaData": "1" },
-        signal: ac.signal
-      }).then(function (resp) {
-        if (!resp.ok || !resp.body) { throw new Error("bad response " + resp.status); }
-        var reader = resp.body.getReader();
-        var received = 0;
-        var chunks = [];
-
-        function pump() {
-          return reader.read().then(function (res) {
-            if (res.done) { throw new Error("stream ended"); }
-            chunks.push(res.value);
-            received += res.value.length;
-            if (received < need) { return pump(); }
-
-            // Собираем буфер и разрываем соединение
-            var total = 0;
-            var arr = new Uint8Array(received);
-            for (var i = 0; i < chunks.length; i++) {
-              arr.set(chunks[i], total);
-              total += chunks[i].length;
-            }
-            reader.cancel().catch(function () {});
-            clearTimeout(timer);
-
-            var metaStr = getMetaInterval(metaInt, arr);
-            var title = metaStr ? parseStreamTitle(metaStr) : null;
-            if (title && title !== currentTitle) {
-              currentTitle = title;
-              nowPlaying.textContent = "Сейчас играет: " + title;
-            } else if (!title && !currentTitle) {
-              // Станция не передаёт название трека — показываем заглушку один раз
-              nowPlaying.textContent = "Сейчас играет: (название не передаётся станцией)";
-            }
-            scheduleRetryNow();
-            return;
-          });
-        }
-        return pump();
-      }).catch(function (e) {
-        clearTimeout(timer);
-        if (e && e.name === "AbortError") { return; }
-        scheduleRetryNow();
-      });
-    } catch (e) {
-      scheduleRetryNow();
-    }
-  }
-
-  function scheduleRetryNow() {
-    clearTimeout(metaTimer);
-    if (!audio.paused) {
-      metaTimer = setTimeout(readMetadata, 30000);
-    }
-  }
-
-  audio.addEventListener("play", function () {
-    currentTitle = "";
-    nowPlaying.textContent = "";
-    readMetadata();
-  });
-
-  audio.addEventListener("pause", function () {
-    clearTimeout(metaTimer);
-  });
-});
+  audio.src = streamUrl;
+  audio.load();
+  artist.textContent = "Нажмите Play для загрузки потока";
+})();
 </script>
 </body>
 </html>
