@@ -300,21 +300,17 @@
     <p style="margin-top:12px;"><a href="https://vk.com/radio_ptica" target="_blank" rel="noopener">Мы ВКонтакте</a></p>
   </section>
 
-  <section>
+<section>
     <h2>Видео</h2>
     <p>Записи трансляций и прямые эфиры радио «Птица»:</p>
     <div class="vk-video-wrap">
-      <div class="vk-video-placeholder" id="vkVideoPlaceholder">
-        <p style="color:var(--muted);font-size:14px;margin-bottom:10px;">Вставьте код трансляции</p>
-        <a href="https://vk.ru/radio_ptica" target="_blank" rel="noopener" style="color:var(--accent);">VK — vk.ru/radio_ptica</a>
+      <div class="vk-video-placeholder">
+        <p style="color:var(--muted);font-size:15px;margin-bottom:10px;">Прямой эфир и записи</p>
+        <a href="https://vkvideo.ru/@radio_ptica" target="_blank" rel="noopener" style="color:var(--accent);font-size:16px;font-weight:600;">Перейти к видео → VK Видео</a>
       </div>
     </div>
-    <div style="text-align:center;margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-      <input type="text" id="vkVideoInput" placeholder="ID видео VK (например, -12345_67890)" style="flex:1;max-width:300px;background:var(--card2,#232734);border:1px solid #2e3343;border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;">
-      <button id="vkVideoBtn" style="background:var(--accent);border:none;color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;">Вставить</button>
-    </div>
     <p style="text-align:center;margin-top:12px;">
-      <a href="https://m.vkvideo.ru/@radio_ptica" target="_blank" rel="noopener">Все записи — VK Видео</a>
+      <a href="https://vkvideo.ru/@radio_ptica" target="_blank" rel="noopener">vkvideo.ru/@radio_ptica</a>
     </p>
   </section>
 
@@ -426,26 +422,6 @@
   audio.src = streamUrl;
   audio.load();
   artist.textContent = "Нажмите Play для загрузки потока";
-})();
-
-(function () {
-  var input = document.getElementById("vkVideoInput");
-  var btn = document.getElementById("vkVideoBtn");
-  var wrap = document.querySelector(".vk-video-wrap");
-
-  function embedVkVideo(id) {
-    id = id.trim();
-    if (!id) return;
-    var iframe = document.createElement("iframe");
-    iframe.src = "https://vk.com/video_ext.php?" + (id.indexOf("_") >= 0 ? "oid=" + id.split("_")[0] + "&id=" + id.split("_")[1] : "id=" + id);
-    iframe.allowFullscreen = true;
-    iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen");
-    wrap.innerHTML = "";
-    wrap.appendChild(iframe);
-  }
-
-  btn.addEventListener("click", function () { embedVkVideo(input.value); });
-  input.addEventListener("keydown", function (e) { if (e.key === "Enter") embedVkVideo(input.value); });
 })();
 </script>
 </body>
