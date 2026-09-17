@@ -189,6 +189,32 @@
     margin-top: 8px;
   }
 
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .video-item { text-align: center; }
+  .video-wrap {
+    position: relative;
+    padding-top: 56.25%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #000;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .video-label {
+    margin-top: 8px;
+    font-size: .9rem;
+    color: var(--muted);
+  }
+
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
@@ -255,6 +281,29 @@
       <source src="https://listen8.myradio24.com/25095" type="audio/mpeg">
       Ваш браузер не поддерживает элемент audio.
     </audio>
+  </section>
+
+  <section>
+    <h2>Видео</h2>
+    <p>Записи трансляций радио «Птица»:</p>
+    <div class="video-grid">
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/GGpIhkQnOXI" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="video-label">Ирина Богатова — пианист и барабанщик</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/WMYDCroBIX0" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="video-label">Радио «Птица» — видео</p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:14px;">
+      <a href="https://vk.ru/radio_ptica" target="_blank" rel="noopener">Мы ВКонтакте — vk.ru/radio_ptica</a> &nbsp;·&nbsp;
+      <a href="https://m.vkvideo.ru/@radio_ptica" target="_blank" rel="noopener">Записи трансляций — VK Видео</a>
+    </p>
   </section>
 
   <section>
